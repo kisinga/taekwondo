@@ -1,27 +1,14 @@
 # Taekwondo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
+This is an angular application that helps keep score of a Taekwondo match
 
-## Development server
+## How it Works
+1. On initialization the electron app spawns a child process that runs a local server connected to a MongoDB instance
+(I know it's an overkill but I needed to learn)
+2. The electron app also switches on a wifi  hotspot for the client devices to connect
+3. Clint devices automatically scan an connect to our server
+4. Information is streamed to the server and relayed to the user Via an angualr implementation on top of electron
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+##Prerequisites
+1. Installation of MongoDB (Since I cant bundle it)
+ 
