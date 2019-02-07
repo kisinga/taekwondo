@@ -7,6 +7,15 @@ const ps = fork(`${__dirname}/server.ts`)
 
 let win;
 require('electron-reload')(__dirname);
+var hotspot = require('node-hotspot');
+
+var opts = {
+  ssid: 'hotspot name',
+  password: '66ahhhs641jk',
+  force: true, // (optional)  if hosting a network already turn it off and run ours.
+  adaptor: 'Ethernet' // (optional / false) name of adaptor to have ICS (Internet Connection Sharing) share internet from, passing false disables ICS all together - if non givin node-hotspot will attempt to find currently connected adaptor automatically
+};
+
 
 function createWindow() {
   win = new BrowserWindow({width: 1366, height: 768});
@@ -28,6 +37,27 @@ function createWindow() {
     console.log('application quit')
     pipe.kill('SIGINT');
   });
+
+  hotspot.enable(opts)
+    .then(function() {
+      console.log('Hotspot Enabled')
+    })
+    .catch(function(e) {
+      console.log('Something went wrong; Perms?', e)
+    });
+
+  hotspot.disable(opts)
+    .then(function() {
+      console.log('Hotspot disabled')
+    })
+    .catch(function(e) {
+      console.log('Something went wrong; Perms?', e)
+    });
+
+  hotspot.stats(opts)
+    .then(function(status) {
+      console.log('Hotspot status: ' + status) //status contains clients object and state
+    });
 }
 
 app.on("ready", createWindow);
