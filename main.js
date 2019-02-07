@@ -3,24 +3,13 @@ const path = require("path");
 const url = require("url");
 const {fork} = require('child_process')
 
-//Mongodb spawn process
-const spawn = require("child_process").spawn;
-const pipe = spawn("mongod", [" — dbpath=YourDBPath", " — port", '27018']);
-pipe.stdout.on('data', function (data) {
-  console.log(data.toString('utf8'));
-});
-pipe.stderr.on('data', (data) => {
-  console.log(data.toString('utf8'));
-});
-pipe.on('close', (code) => {
-  console.log('Process exited with code: ' + code);
-});
-const ps = fork(`${__dirname}/server.js`)
+const ps = fork(`${__dirname}/server.ts`)
+
 let win;
 require('electron-reload')(__dirname);
 
 function createWindow() {
-  win = new BrowserWindow({width: 800, height: 600});
+  win = new BrowserWindow({width: 1366, height: 768});
 
   // load the dist folder from Angular
   win.loadURL(
