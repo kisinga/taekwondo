@@ -11,7 +11,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-import {ElectronService} from './providers/electron.service';
 
 import {WebviewDirective} from './directives/webview.directive';
 
@@ -25,6 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SampleModule} from './main/sample/sample.module';
 import {LayoutModule} from './layout/layout.module';
 import {MatButtonModule, MatIconModule} from '@angular/material';
+import {ElectronService} from './services/electron.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
