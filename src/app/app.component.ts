@@ -14,7 +14,7 @@ import {FuseTranslationLoaderService} from '@fuse/services/translation-loader.se
 import {navigation} from 'app/navigation/navigation';
 import {locale as navigationEnglish} from 'app/navigation/i18n/en';
 import {locale as navigationTurkish} from 'app/navigation/i18n/tr';
-import {WifiService} from './services/wifi.service';
+import * as hotspot from 'node-hotspot';
 
 @Component({
   selector: 'app',
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private _fuseTranslationLoaderService: FuseTranslationLoaderService,
     private _translateService: TranslateService,
     private _platform: Platform,
-    private wifiservice: WifiService,
+    // private wifiservice: WifiService,
   ) {
     // Get default navigation
     this.navigation = navigation;
@@ -110,7 +110,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this._platform.ANDROID || this._platform.IOS) {
       this.document.body.classList.add('is-mobile');
     }
-
     // Set the private defaults
     this._unsubscribeAll = new Subject();
 
@@ -119,9 +118,35 @@ export class AppComponent implements OnInit, OnDestroy {
       password: 12345678,
       status: false,
     };
-    this.wifiservice.setWifi(wificred.wifiname, wificred.password);
-  }
+    // this.wifiservice.setWifi(wificred.wifiname, wificred.password);
+    const opts = {
+      ssid: 'hotspot name',
+      password: '66ahhhs641jk',
+      force: true, // (optional)  if hosting a network already turn it off and run ours.
+      adaptor: 'Ethernet'
+    };
 
+    hotspot.enable(opts)
+      .then(function () {
+        console.log('Hotspot Enabled');
+      })
+      .catch(function (e) {
+        console.log('Something went wrong; Perms?', e);
+      });
+
+    hotspot.disable(opts)
+      .then(function () {
+        console.log('Hotspot disabled');
+      })
+      .catch(function (e) {
+        console.log('Something went wrong; Perms?', e);
+      });
+
+    hotspot.stats(opts)
+      .then(function (status) {
+        console.log('Hotspot status: ' + status); // status contains clients object and state
+      });
+  }
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------
