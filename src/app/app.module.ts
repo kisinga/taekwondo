@@ -25,17 +25,22 @@ import {SampleModule} from './main/sample/sample.module';
 import {LayoutModule} from './layout/layout.module';
 import {MatButtonModule, MatIconModule} from '@angular/material';
 import {ElectronService} from './services/electron.service';
+import {Stitch} from 'mongodb-stitch-browser-sdk';
+import { LoginComponent } from './components/login/login.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+Stitch.initializeDefaultAppClient('electron-ynfwr>');
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    WebviewDirective
+    WebviewDirective,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,30 @@
-import { app, BrowserWindow, screen } from 'electron';
+import {app, BrowserWindow, screen} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
 let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
+const {ipcMain, ipcRenderer} = require('electron');
 
-const {fork} = require('child_process');
-const ps = fork(`${__dirname}/server.js`);
+//
+// const {spawn} = require('child_process');
+//
+// const child = spawn('node', ['server.js'], {stdio: ['inherit', 'inherit', 'inherit', 'ipc']});
+//
+// let channelevent;
+// ipcMain.on('serverchannel', function (event, arg) {
+//   console.log(arg);
+//   channelevent = event;
+// });
+//
+// child.on('message', function (m) {
+//   console.log(channelevent);
+//
+//   ipcMain.emit('msg', 'estinf')
+//   channelevent ? channelevent.returnvalue(m) : null;
+// });
+
 
 function createWindow() {
 

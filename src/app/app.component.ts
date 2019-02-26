@@ -15,6 +15,7 @@ import {navigation} from 'app/navigation/navigation';
 import {locale as navigationEnglish} from 'app/navigation/i18n/en';
 import {locale as navigationTurkish} from 'app/navigation/i18n/tr';
 import * as hotspot from 'node-hotspot';
+import {ElectronService} from './services/electron.service';
 
 @Component({
   selector: 'app',
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private _fuseTranslationLoaderService: FuseTranslationLoaderService,
     private _translateService: TranslateService,
     private _platform: Platform,
-    // private wifiservice: WifiService,
+    private _electronService: ElectronService
   ) {
     // Get default navigation
     this.navigation = navigation;
@@ -147,6 +148,7 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log('Hotspot status: ' + status); // status contains clients object and state
       });
   }
+
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------
